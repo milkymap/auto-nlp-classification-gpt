@@ -14,7 +14,7 @@ This project aims to provide an autonomous pipeline for creating NLP models for 
     pip install --upgrade pip
     pip install -r requirements.txt 
 
-    python main.py -cls class0 -cls class1 -cls class2 ... -cls classN -limit 50 --port nb_epochs 64 --batch_size 16 -lr 0.001
+    python main.py -cls class0 -cls class1 -cls class2 ... -cls classN -limit 50 nb_epochs 64 --batch_size 16 -lr 0.001 --host '0.0.0.0' --port 8000
     # go to http://localhost:8000/docs to use the server
 ```
 

@@ -16,13 +16,15 @@ load_dotenv()
 @click.option('--nb_epochs', default=10, type=int)
 @click.option('--batch_size', default=32, type=int)
 @click.option('--lr', default=0.001, type=float)
-def main(openai_api_key:str, categories:List[str], limit:int, nb_epochs:int, batch_size:int, lr:float):
+@click.option('--host', default='0.0.0.0', type=str)
+@click.option('--port', default=8000, type=int)
+def main(openai_api_key:str, categories:List[str], limit:int, nb_epochs:int, batch_size:int, lr:float, host:str, port:int):
     openai.api_key = openai_api_key
     async def run():
         async with GPTLearner(nb_epochs=nb_epochs, batch_size=batch_size, lr=lr) as learner:
             model = await learner.solve_task(categories, limit=limit)
             if model is not None:
-                await learner.deploy_server(model=model, categories=categories)
+                await learner.deploy_server(model=model, categories=categories, host=host, port=port)
     asyncio.run(run())
 
 if __name__ == '__main__':
